@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player : MonoBehaviour
+public class player2 : MonoBehaviour
 {
-    Rigidbody2D rigid;
+      Rigidbody2D rigid;
     public float maxSpeed;
     public float jumpPower;
 /*    SpriteRenderer spriteRenderer;*/
@@ -22,11 +22,11 @@ public class player : MonoBehaviour
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
-        //∏ÿ√‚∂ß º”µµ
+/*        //∏ÿ√‚∂ß º”µµ
         if (Input.GetButtonDown("Horizontal"))
         {
             rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
-        }
+        }*/
     }
 
 
@@ -59,5 +59,4 @@ public class player : MonoBehaviour
                             }*/
             }
         }
-    }
 }
