@@ -4,49 +4,49 @@ using UnityEngine;
 
 public class player2 : MonoBehaviour
 {
-      Rigidbody2D rigid;
+    Rigidbody2D rigid;
     public float maxSpeed;
     public float jumpPower;
-/*    SpriteRenderer spriteRenderer;*/
+    /*    SpriteRenderer spriteRenderer;*/
 
 
     void Awake()
     {
-        rigid= GetComponent<Rigidbody2D>();
-/*        spriteRenderer = GetComponent<SpriteRenderer>();*/
+        rigid = GetComponent<Rigidbody2D>();
+        /*        spriteRenderer = GetComponent<SpriteRenderer>();*/
     }
     void Update()
     {
         //Jump
-        if(Input.GetButtonDown("Jump")/* && !Animation.GetBool("isJumping")*/) 
+        if (Input.GetButtonDown("Jump")/* && !Animation.GetBool("isJumping")*/)
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         }
-/*        //멈출때 속도
-        if (Input.GetButtonDown("Horizontal"))
+        //멈출때 속도
+        if (Input.GetButtonDown("Left Right Arrow"))
         {
             rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
-        }*/
+        }
     }
 
 
     void FixedUpdate()
     {
         //움직일때 속도
-        float h = Input.GetAxisRaw("Horizontal");
+        float h = Input.GetAxisRaw("Left Right Arrow");
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
 
-        if(rigid.velocity.x > maxSpeed)
+        if (rigid.velocity.x > maxSpeed)
         {
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
         }
-        else if(rigid.velocity.x < maxSpeed*(-1)) 
+        else if (rigid.velocity.x < maxSpeed * (-1))
         {
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
         }
 
         //착지했을 때 바닥 감지
-        if(rigid.velocity.y < 0)
+        if (rigid.velocity.y < 0)
         {
             Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
             RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Floor"));
@@ -59,4 +59,5 @@ public class player2 : MonoBehaviour
                             }*/
             }
         }
+    }
 }
