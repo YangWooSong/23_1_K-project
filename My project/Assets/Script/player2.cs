@@ -7,20 +7,19 @@ public class player2 : MonoBehaviour
     Rigidbody2D rigid;
     public float maxSpeed;
     public float jumpPower;
-    /*    SpriteRenderer spriteRenderer;*/
-
+    private bool isFloor = true;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        /*        spriteRenderer = GetComponent<SpriteRenderer>();*/
     }
     void Update()
     {
         //Jump
-        if (Input.GetButtonDown("Jump")/* && !Animation.GetBool("isJumping")*/)
+        if (Input.GetButtonDown("Jump") && isFloor) //스페이스바를 누르고, 캐릭터가 땅에 있다면
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            isFloor = false; //땅에서 떨어졌으므로 isFloor false
         }
         //멈출때 속도
         if (Input.GetButtonDown("Left Right Arrow"))
@@ -44,20 +43,13 @@ public class player2 : MonoBehaviour
         {
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
         }
+    }
 
-        //착지했을 때 바닥 감지
-        if (rigid.velocity.y < 0)
+    void OnCollisionEnter2D(Collision2D other)
+     {
+        if (other.gameObject.tag == "Floor")
         {
-            Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
-            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Floor"));
-
-            if (rayHit.collider != null)
-            {
-                /*            if (rayHit.distance < 0.5f)
-                            {
-                                anim. 착지 애니메이션28:50
-                            }*/
-            }
+           isFloor = true;
         }
     }
 }
