@@ -9,6 +9,7 @@ public class player : MonoBehaviour
     public float jumpPower;
     private bool isFloor = true;
 
+
     void Awake()
     {
         rigid= GetComponent<Rigidbody2D>();
@@ -16,10 +17,10 @@ public class player : MonoBehaviour
     void Update()
     {
         //Jump
-        if(Input.GetButtonDown("Jump") && isFloor) //스페이스바를 누르고, 캐릭터가 땅에 있다면
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isFloor /* && !Animation.GetBool("isJumping")*/) //스페이스바를 누르고, 캐릭터가 땅에 있다면
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            isFloor = false; //땅에서 떨어졌으므로 isFloor false
+            isFloor = false;
         }
         //멈출때 속도
         if (Input.GetButtonDown("Horizontal"))
