@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SceneConversion
   - Floor
+  - Head
   layers:
   - Default
   - TransparentFX

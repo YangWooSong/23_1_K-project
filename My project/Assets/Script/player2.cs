@@ -7,7 +7,7 @@ public class player2 : MonoBehaviour
     Rigidbody2D rigid;
     public float maxSpeed;
     public float jumpPower;
-    private bool isFloor = true;
+    private bool isjump = true;
 /*    private bool isPlayer = true;*/
 
     void Awake()
@@ -17,10 +17,10 @@ public class player2 : MonoBehaviour
     void Update()
     {
         //Jump
-        if (Input.GetKeyDown(KeyCode.W) && isFloor)/*isPlayer  && !Animation.GetBool("isJumping")*/ //스페이스바를 누르고, 캐릭터가 땅에 있다면
+        if (Input.GetKeyDown(KeyCode.W) && isjump)/*isPlayer  && !Animation.GetBool("isJumping")*/ //스페이스바를 누르고, 캐릭터가 땅에 있다면
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            isFloor = false;
+            isjump = false;
             /*isPlayer= false;*/
         }
         //멈출때 속도
@@ -48,11 +48,21 @@ public class player2 : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other)
-     {
+    {
         if (other.gameObject.tag == "Floor" /*&& other.gameObject.tag == "Player"*/)
         {
-            isFloor = true;
+            isjump = true;
             /*isPlayer = true;*/
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+     {
+        
+        if (other.gameObject.tag == "Head")
+        {
+            isjump = true;
+        }
+    }
+ 
 }
