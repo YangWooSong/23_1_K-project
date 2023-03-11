@@ -5,10 +5,13 @@ using UnityEngine;
 public class player2 : MonoBehaviour
 {
     Rigidbody2D rigid;
+    public Animator animator;
     public float maxSpeed;
     public float jumpPower;
     private bool isjump = true;
-/*    private bool isPlayer = true;*/
+    private bool isJump = true;
+    private bool isDie = false;
+    /*    private bool isPlayer = true;*/
 
     void Awake()
     {
@@ -28,6 +31,19 @@ public class player2 : MonoBehaviour
         {
             rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
         }
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            animator.SetBool("IsJumping", true);
+        }
+        else animator.SetBool("IsJumping", false);
+
+        if (Input.GetButton("Left Right Arrow"))
+        {
+            animator.SetBool("IsWalking", true);
+        }
+        else animator.SetBool("IsWalking", false);
+
     }
 
 

@@ -7,26 +7,41 @@ public class player : MonoBehaviour
     Rigidbody2D rigid;
     public float maxSpeed;
     public float jumpPower;
-    private bool isjump = true;
-
+    private bool isJump = true;
+    private bool isDie = false;
+    public Animator animator;
 
     void Awake()
-    {
-        rigid= GetComponent<Rigidbody2D>();
+    { 
+        rigid = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
         //Jump
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isjump /* && !Animation.GetBool("isJumping")*/) //스페이스바를 누르고, 캐릭터가 땅에 있다면
-        {
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isJump /* && !Animation.GetBool("isJumping")*/) //스페이스바를 누르고, 캐릭터가 땅에 있다면
+        {     
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            isjump = false;
+            isJump = false;
+           
         }
         //멈출때 속도
         if (Input.GetButtonDown("Horizontal"))
         {
             rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
         }
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            animator.SetBool("IsJumping", true);
+        }
+        else animator.SetBool("IsJumping", false);
+
+        if (Input.GetButton("Horizontal"))
+        {
+            animator.SetBool("IsWalking", true);
+        }
+        else animator.SetBool("IsWalking", false);
+
     }
 
 
@@ -50,7 +65,8 @@ public class player : MonoBehaviour
     {
         if (other.gameObject.tag == "Floor")
         {
-            isjump = true;
+            isJump = true;
+            animator.SetBool("IsJumping", false);
         }
     }
 
@@ -59,7 +75,8 @@ public class player : MonoBehaviour
 
         if (other.gameObject.tag == "Head")
         {
-            isjump = true;
+            isJump = true;
+            animator.SetBool("IsJumping", false);
         }
     }
 }
