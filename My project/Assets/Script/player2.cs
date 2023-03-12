@@ -11,7 +11,9 @@ public class player2 : MonoBehaviour
     private bool isjump = true;
     private bool isJump = true;
     private bool isDie = false;
-    /*    private bool isPlayer = true;*/
+    public GameObject Target; //버튼을 누르면 사라질 객체
+    public GameObject Btn; //버튼도 사라지게
+
 
     void Awake()
     {
@@ -65,11 +67,20 @@ public class player2 : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Floor" /*&& other.gameObject.tag == "Player"*/)
+        if (other.gameObject.tag == "Floor")
         {
             isjump = true;
-            /*isPlayer = true;*/
         }
+        if (other.gameObject.tag == "Obstacle")
+        {
+            animator.SetBool("IsDie", true);
+        }
+        if (other.gameObject.tag == "Btn")
+        {
+            Target.SetActive(false);
+            Btn.SetActive(false);
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)

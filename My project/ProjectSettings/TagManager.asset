@@ -7,6 +7,11 @@ TagManager:
   - SceneConversion
   - Floor
   - Head
+  - Obstacle
+  - Btn
+  - Btn2
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX
