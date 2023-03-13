@@ -73,7 +73,7 @@ public class player : MonoBehaviour
             animator.SetBool("IsJumping", false);
         }
         if (other.gameObject.tag == "Obstacle")
-        {
+        { 
             animator.SetBool("IsDie", true);
         }
         if (other.gameObject.tag == "Btn")
