@@ -11,8 +11,7 @@ public class player : MonoBehaviour
     private bool isDie = false;
     public Animator animator;
     public GameObject Target; //버튼을 누르면 사라질 객체
-    public GameObject Btn; //버튼도 사라지게
-    
+    public GameObject Btn; //버튼도 사라지게\
 
 
     void Awake()
@@ -58,12 +57,10 @@ public class player : MonoBehaviour
         if (rigid.velocity.x > maxSpeed)
         {
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
-            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if (rigid.velocity.x < maxSpeed * (-1))
         {
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
-            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
 
@@ -82,6 +79,10 @@ public class player : MonoBehaviour
         {
             Target.SetActive(false);
             Btn.SetActive(false);
+        }
+        if (other.gameObject.tag == "Blind")
+        {
+            Destroy(other.gameObject);
         }
     }
 

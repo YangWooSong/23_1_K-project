@@ -12,6 +12,7 @@ TagManager:
   - Btn2
   - Player1
   - Player2
+  - Blind
   layers:
   - Default
   - TransparentFX
